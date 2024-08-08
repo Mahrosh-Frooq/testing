@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>First Class Html</title>
+    <link rel="icon" type="image/png" href="simple-twitter-16x16-icon-png-7.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    
+    <div id="header" class="slideDown">
+      <h1>Header</h1>
+    </div>
+    <div id="container">
+      <div id="sidebar">
+        <h1>Sidebar</h1>
+      </div>
+      <div id="mainBox" style="display: flex; width: 100%; gap:10px">
+        <div class="grid-item slideDown" style="width: 30%;">
+            <form style="display: flex; flex-direction:column; gap: 4px; ">
+              <label>Task Detail</label>
+              <input type="text" name="task" required="true" id="taskField" />
+              <span style="color:red;" hidden id="taskErrorField">This field is required</span>
+              <button type="button" onclick="saveTask()" class="submitBtn" style="background-color: blue; color: white; padding: 10px; border: none; border-radius: 5px;">Submit</button>
+            </form>
+        </div>
+        <div style="width: 80%; display: flex; flex-direction: column; gap: 4px;" class="grid-item slideDown">
+          <div class="box" style="background-color: aqua;">
+            <div style="padding-left:10px; border-radius: 50%; padding-right: 10px; display:flex; justify-content: space-between; align-items: center;">
+              <p>This our task</p>
+              <div >
+                <button>
+                  Edit
+                </button>
+                <button>
+                  X
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </body>
+  <script>
+    // syntax
+    // camelCase - taskField
+    // snake_case - task_field
+    // kebab-case - task-field
+    // pascal-case - TaskField
+
+    var taskErrorField = document.getElementById('taskErrorField');
+
+    function saveTask() {
+      debugger;
+      var taskVal = document.getElementById('taskField');
+
+      if(taskVal.validity.valueMissing){
+        alert("please fill the required fields");
+        taskErrorField.hidden = false
+        return false
+      }
+      taskErrorField.hidden = true
+
+      
+    }
+
+
+  </script>
+</html>
