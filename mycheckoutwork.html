@@ -331,7 +331,7 @@
 
 
        products.forEach((x) => {
-       var priceBox = x.discounted_price < x.price ? `<div class = 'actual-price'>
+       var priceBox = x.discounted_price < x.price ? `<div class = 'text-flamingo-500'>
         <span class='discount-price'> `+x.price+ `</span>
         `+x.discounted_price+`
         </div>` : `<div class='actual-price'>
@@ -345,7 +345,7 @@
             `+ priceBox +`
             <div class='addToCartBox'>
                 <input type='number' id='qty` + x.id +`'/>
-                <button onclick='addToCart(`+x.id+`)'>Add to Cart</button>
+                <button  class='bg-elm-400 text-silver-200 font-medium rounded-lg w-32 py-1' onclick='addToCart(`+x.id+`)'>Add to Cart</button>
 
                 </div>
           </div>`;
