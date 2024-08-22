@@ -1,35 +1,96 @@
 <html>
     <head>
-        <title> First Class Html</title>
-        <link rel='icon' type='image/png' href='simple-twitter-16x16-icon-png-7.png'/>
-        <link rel='stylesheet' href='style.css' />
-        <style>
-            .discount-price {
-                text-decoration: line-through;
-                color: brown;
-            }
-            .actual-price {
-                color:crimson;
-            }
-
-            .paymentLabel {
-                display: flex;
-                align-items: center;
-            }
-
+        
         </style>
-    </head>
+        <head>
+            <title>Class work | Home Work | test server change</title>
+            <link rel="stylesheet" href="stylee.css">
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="tailwindcss.js"></script>
+            
+                
+            </style>
+            <script>
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+            'elm': {
+  DEFAULT: '#1E7B85',
+  50: '#7AD7E1',
+  100: '#69D2DD',
+  200: '#48C8D6',
+  300: '#2DB9C8',
+  400: '#269AA6',
+  500: '#1E7B85',
+  600: '#196870',
+  700: '#15555B',
+  800: '#104147',
+  900: '#0B2E32',
+  950: '#092427'
+},                    
+            
+            'flamingo': {
+                DEFAULT: '#EF4444',
+                50: '#FDEDEF',
+                100: '#FCDADE',
+                200: '#F9B5BA',
+                300: '#F58F94',
+                400: '#F26A6D',
+                500: '#EF4444',
+                600: '#EC241E',
+                700: '#D01B12',
+                800: '#AA1A0F',
+                900: '#84170B',
+                950: '#72150A'
+              },
+'silver': {
+  DEFAULT: '#C1C1C1',
+  50: '#FFFFFF',
+   100: '#FFFFFF',
+  200: '#FEFEFE',
+  300: '#EAEAEA',
+  400: '#D5D5D5',
+  500: '#C1C1C1',
+  600: '#989898',
+  700: '#6F6F6F',
+  800: '#474747',
+  900: '#1E1E1E',
+  950: '#090909'
+},
+'fuchsia-blue': {
+  DEFAULT: '#8452BC',
+  50: '#D7D7EF',
+  100: '#C9C8EA',
+  200: '#B2ABDE',
+  300: '#9F8DD3',
+  400: '#9070C7',
+  500: '#8452BC',
+  600: '#783FA2',
+  700: '#683281',
+  800: '#53255F',
+  900: '#3B183E',
+  950: '#2D122E'
+},
 
-    <body>
-        <div id='header' class='slidedown'>
-            <h1>Header</h1>
+}
+            }
+        }
+    }
+    </script>
+</head>
+
+    <body class="bg-silver-50 flex flex-col text-elm-900 h-svh">
+        <div class="bg-flamingo-50 p-8">
+            <h1 class="text-elm-500 text-6xl">Header</h1>
         </div>
-        <div id='container'>
-          <div id='sidebar'>
-            <h1>Sidebar</h1>
+        <div id='container' class="flex grow flex-column">
+          <div class="w-72 box-border p-8 bg-flamingo-100">
+            <h1 class="text-elm-400 text-2xl">Sidebar</h1>
         </div>
-        <div id='mainBox' style='display: flex; width: 100%; gap:10px'></div>
-            <div class='grid-item slideDown' style='width:30%;'>
+        <div id='mainBox' class="flex w-full gap-4">
+            <div class='bg-silver-500 text-silver-950 p-4 rounded-md shadow-2xl slideDown' style='width:30%;'>
                 <form id='ecommerceForm' onsubmit='event.preventDefault();' style='display:flex ;flex-direction:column; gap:4px;'>
                     <label>Checkout Form</label>
                     <input type='text' name='first_name' required id='first_name' placeholder="Enter your first_name"/>
@@ -57,25 +118,25 @@
                     </select>
                     <span style='color:rgba(255, 0, 0, 0.514);' hidden id ='tasErrorField-country'>This field is required</span>
                     <div>
-                        <label class="paymentLabel">
+                        <label class="flex gap-2 elm-700">
                           <input type="radio" name='task' required id ='payment_method' checked placeholder="Enter your payment_method"/>
                            Cash On Delivery
                         </label>
-                        <label class="paymentLabel">
+                        <label class="flex gap-2">
                             <input type="radio" name='task' required id ='payment_method' placeholder="Enter your payment_method"/>
                             Online Payment
                             </label>
                         </div>
-                        <button type='button' onclick="submitCheckout()" id='submitBtn' class='submitBtn' style='background-color: blue; color: white; padding: 10px; border:none; border-radius: 5px;'>Checkout</button>
+                        <button type='button' onclick="submitCheckout()" id='submitBtn' class='bg-elm-600 text-silver-200 p-2 border-0 hover:bg-elm-700 active:bg-elm-700 rounded-md'>Checkout</button>
                 </form>
                 <div>
                     <label>Cart Details</label>
-                    <div id="boxlist" style="width:80%; display: flex; flex-direction: column; gap: 4px;" class="grid-item slideDown">
+                    <div id="boxlist" style="width: 80%; display: flex; flex-direction: column; gap: 4px;" class=" bg-elm-600 slideDown">
 
                     </div>
                 </div>
          </div>
-                <div id='main'>
+                <div id='main' class="p-4 grid grow border-box bg-silver-400 gap-4 ">
 
             </div>
         </div>
@@ -359,3 +420,4 @@
     
     </script>
  </html>
+
