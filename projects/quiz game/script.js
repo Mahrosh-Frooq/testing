@@ -21,7 +21,7 @@ const questions = [
     question: "What does CSS stand for?",
     answers: [
       {text: "Creative Style Sheets", correct: false},
-      {text: "colorful Style Sheets", correct: false},
+      {text: "Colorful Style Sheets", correct: false},
       {text: "Computer Style Sheets", correct: false},
       {text: "Cascading Style Sheets", correct: true},
     ]
