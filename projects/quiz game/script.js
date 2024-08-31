@@ -1,6 +1,5 @@
 
 
-
 const _question = document.getElementById('question');
 const _options = document.querySelector('.quiz-options');
 const _checkBtn = document.getElementById('check-answer');
@@ -11,15 +10,16 @@ const _totalQuestion = document.getElementById('total-question');
 
 let correctAnswer = "", correctScore = askedCount = 0, totalQuestion = 10;
 
-
+// load question from API
 async function loadQuestion(){
-    const APIUrl = 'https://opentdb.com/api.php?amount=6&category=18';
+    const APIUrl = 'https://opentdb.com/api.php?amount=1';
     const result = await fetch(`${APIUrl}`)
     const data = await result.json();
     _result.innerHTML = "";
     showQuestion(data.results[0]);
 }
 
+// event listeners
 function eventListeners(){
     _checkBtn.addEventListener('click', checkAnswer);
     _playAgainBtn.addEventListener('click', restartQuiz);
@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 
-
+// display question and options
 function showQuestion(data){
     _checkBtn.disabled = false;
     correctAnswer = data.correct_answer;
     let incorrectAnswer = data.incorrect_answers;
     let optionsList = incorrectAnswer;
     optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
-
+    // console.log(correctAnswer);
 
     
     _question.innerHTML = `${data.question} <br> <span class = "category"> ${data.category} </span>`;
@@ -53,7 +53,7 @@ function showQuestion(data){
 }
 
 
-
+// options selection
 function selectOption(){
     _options.querySelectorAll('li').forEach(function(option){
         option.addEventListener('click', function(){
