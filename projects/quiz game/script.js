@@ -1,5 +1,6 @@
 
 
+
 const _question = document.getElementById('question');
 const _options = document.querySelector('.quiz-options');
 const _checkBtn = document.getElementById('check-answer');
@@ -12,13 +13,12 @@ let correctAnswer = "", correctScore = askedCount = 0, totalQuestion = 10;
 
 
 async function loadQuestion(){
-    const APIUrl = 'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple';
+    const APIUrl = 'https://opentdb.com/api.php?amount=6&category=18';
     const result = await fetch(`${APIUrl}`)
     const data = await result.json();
     _result.innerHTML = "";
     showQuestion(data.results[0]);
 }
-
 
 function eventListeners(){
     _checkBtn.addEventListener('click', checkAnswer);
@@ -40,7 +40,8 @@ function showQuestion(data){
     let incorrectAnswer = data.incorrect_answers;
     let optionsList = incorrectAnswer;
     optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
-    
+
+
     
     _question.innerHTML = `${data.question} <br> <span class = "category"> ${data.category} </span>`;
     _options.innerHTML = `
@@ -65,7 +66,7 @@ function selectOption(){
     });
 }
 
-
+// answer checking
 function checkAnswer(){
     _checkBtn.disabled = true;
     if(_options.querySelector('.selected')){
@@ -83,7 +84,7 @@ function checkAnswer(){
     }
 }
 
-
+// to convert html entities into normal text of correct answer if there is any
 function HTMLDecode(textString) {
     let doc = new DOMParser().parseFromString(textString, "text/html");
     return doc.documentElement.textContent;
