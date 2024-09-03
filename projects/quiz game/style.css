@@ -91,7 +91,7 @@ body{
 .quiz-options li:active{
     transform: scale(0.97);
 }
-/* js related */
+
 .selected{
     background-color: var(--grey-color)!important;
     color: var(--dark-color)!important;
