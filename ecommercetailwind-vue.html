@@ -3,6 +3,7 @@
 <head>
     <title> First Class Html</title>
     <link rel='icon' type='image/png' href='simple-twitter-16x16-icon-png-7.png' />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="tailwindcss.js"></script>
     <script>
         tailwind.config = {
@@ -99,9 +100,14 @@
     </script>
 </head>
 
-<body class="bg-flamingo-50 flex flex-col text-black-900 h-svh">
+<body id="app" class="bg-flamingo-50 flex flex-col text-black-900 h-svh">
     <div class="bg-flamingo-400 p-8">
-        <h1 class="text-great-blue-200 text-6xl">Header</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <button @click="changesMsg">Change Me</button>
     </div>
     <div id='container' class="flex grow flex-column">
         <div class="w-72 box-border p-8 bg-flamingo-300">
@@ -166,6 +172,24 @@
         </div>
 </body>
 <script>
+     const { createApp, ref } = Vue
+
+createApp({
+  setup() {
+    const message = ref('Hello vue!')
+
+    const changesMsg = () => {
+        message.value="I am changed"
+    }
+    return {
+      message,
+      changesMsg,
+    }
+  }
+}).mount('#app')
+
+
+
     var initialCheckoutForm = {
         first_name: '',
         last_name: '',
