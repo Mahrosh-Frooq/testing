@@ -1,0 +1,493 @@
+<html>
+
+<head>
+    <title> First Class Html</title>
+    <link rel='icon' type='image/png' href='simple-twitter-16x16-icon-png-7.png' />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="tailwindcss.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blue': {
+                            DEFAULT: '#6B82C2',
+                            50: '#FDFDFE',
+                            100: '#EDF0F8',
+                            200: '#CCD4EA',
+                            300: '#ACB9DD',
+                            400: '#8B9DD0',
+                            500: '#6B82C2',
+                            600: '#4E6AB7',
+                            700: '#40589C',
+                            800: '#34487F',
+                            900: '#283762',
+                            950: '#222F53'
+                        },
+                        'flamingo': {
+  DEFAULT: '#EF4444',
+  50: '#FDEDED',
+  100: '#FCDADA',
+  200: '#F9B5B5',
+  300: '#F58F8F',
+  400: '#F26A6A',
+  500: '#EF4444',
+  600: '#ED3131',
+  700: '#EC1E1E',
+  800: '#E21313',
+  900: '#D01212',
+  950: '#C61111'
+},
+'black': {
+                            DEFAULT: '#0F0F0F',
+                            50: '#6B6B6B',
+                            100: '#616161',
+                            200: '#4D4D4D',
+                            300: '#383838',
+                            400: '#242424',
+                            500: '#0F0F0F',
+                            600: '#0A0A0A',
+                            700: '#050505',
+                            800: '#000000',
+                            900: '#000000',
+                            950: '#000000'
+                        },
+                        'great-blue': {
+                            DEFAULT: '#2A669F',
+                            50: '#FFFFFF',
+                            100: '#FFFFFF',
+                            200: '#FDFEFE',
+                            300: '#ACE0E9',
+                            400: '#5BAED4',
+                            500: '#2A669F',
+                            600: '#2A539F',
+                            700: '#2A409F',
+                            800: '#2A2C9F',
+                            900: '#3C2A9F'
+                        },
+                        'flamingo': {
+                            DEFAULT: '#EF4444',
+                            50: '#FDEDED',
+                            100: '#FCDADA',
+                            200: '#F9B5B5',
+                            300: '#F58F8F',
+                            400: '#F26A6A',
+                            500: '#EF4444',
+                            600: '#E71414',
+                            700: '#B30F0F',
+                            800: '#800B0B',
+                            900: '#4C0707',
+                            950: '#320404'
+                        },
+                        'mountain-meadow': {
+                            DEFAULT: '#10B981',
+                            50: '#8CF5D2',
+                            100: '#79F3CB',
+                            200: '#53F0BC',
+                            300: '#2EEDAE',
+                            400: '#13DF9B',
+                            500: '#10B981',
+                            600: '#0C855D',
+                            700: '#075239',
+                            800: '#031E15',
+                            900: '#000000',
+                            950: '#000000'
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body id="app" class="bg-flamingo-50 flex flex-col text-black-900 h-svh">
+    <div class="bg-flamingo-400 p-8">
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <button @click="changesMsg">Change Me</button>
+    </div>
+    <div id='container' class="flex grow flex-column">
+        <div class="w-72 box-border p-8 bg-flamingo-300">
+            <h1 class="text-great-blue-200 text-2xl">Sidebar</h1>
+        </div>
+        <div id='mainBox' class="flex w-full gap-4">
+            <div class='bg-flamingo-200 text-black-900 p-4 rounded-md shadow-2xl slideDown' style='width: 30%;'>
+                <form id='ecommerceForm' onsubmit='event.preventDefault();'
+                    style='display:flex ;flex-direction:column; gap:4px;'>
+                    <label>Checkout Form</label>
+                    <input type='text' name='first_name' required id='first_name' placeholder="Enter your first_name" />
+                    <span style='color:red;' hidden id='taskErrorField-first_name'>This field is required</span>
+                    <input type='text' name='last_name' required id='last_name' placeholder='Enter your last_name' />
+                    <span style='color:red;' hidden id='taskErrorField-last_name'>This field is required</span>
+                    <input type='tel' name='number' required id='number' placeholder="Enter your phone_number" />
+                    <span style='color:red;' hidden id='taskErrorField-number'>This field is required</span>
+                    <textarea id="address" name="address" placeholder="Enter your full address"></textarea>
+                    <span style='color:red;' hidden id='taskErrorField-address'>This field is required</span>
+                    <input type='email' name='email' required id='email' placeholder="Enter your email" />
+                    <span style='color:red;' hidden id='taskErrorField-email'>This field is required</span>
+                    <input type='text' name='postal_code' required id='postal_code'
+                        placeholder="Enter your postal_code" />
+                    <span style='color:red;' hidden id='taskErrorField-postal_code'>This field is required</span>
+                    <select id="city" name="city">
+                        <option selected>KARACHI</option>
+                        <option selected>ISLAMABAD</option>
+                        <option selected>LAHORE</option>
+                        <option selected>HYDERABAD</option>
+                        <option selected>GURANWALA</option>
+                    </select>
+                    <span style='color:red;' hidden id='taskErrorField-city'>This field is required</span>
+                    <select id="country" name="country">
+                        <option selected>PAKISTAN</option>
+                    </select>
+                    <span style='color:red;' hidden id='tasErrorField-country'>This field is required</span>
+                    <div>
+                        <label class="flex gap-2 blue-700">
+                            <input type="radio" name='task' required id='payment_method' checked
+                                placeholder="Enter your payment_method" />
+                            Cash On Delivery
+                        </label>
+                        <label class="flex gap-2 ">
+                            <input type="radio" name='task' required id='payment_method'
+                                placeholder="Enter your payment_method" />
+                            Online Payment
+                        </label>
+                    </div>
+                    <button type='button' onclick="submitCheckout()" id='submitBtn'
+                        class='bg-blue-500 text-great-blue-100 p-2 border-0 hover:bg-blue-600 active:bg-blue-600 rounded-md'>Checkout</button>
+                </form>
+                <div>
+                    <label>Cart Details</label>
+                    <div id="boxlist" style="width:80%; display: flex; flex-direction: column; gap: 4px;"
+                        class="grid-item slideDown">
+
+                    </div>
+                </div>
+            </div>
+            <div id='main' class="p-4 grid grow border-box grid-cols-2 gap-4">
+
+            </div>
+        </div>
+</body>
+<script>
+     const { createApp, ref } = Vue
+
+createApp({
+  data() {
+    return {
+        message:'Hello Vue!'
+    }
+},
+beforeCreate() {
+    debugger;
+    alert("we are here before html appears");
+},
+created() {
+    alert("we are here when html created or in a process of rendering");
+},
+beforeMount() {
+    let docCountry = document.getElementById('country');
+    console.log("************* before mount **************");
+    console.log(docCountry);
+},
+mounted() {
+    let docCountry = document.getElementById('country');
+    console.log(docCountry);
+},
+beforeUpdate() {
+    alert("I am here because message being updated");
+},
+updated() {
+    alert("I am here because message is updated now");
+    console.log("************ let see message is updated now ****************");
+    console.log(this.message);
+    this.message = "We are in infinite loop";
+},
+methods: {
+    changesMsg () {
+        this.message = "I am changed now"
+    }
+}
+}).mount('#app')
+
+
+
+    var initialCheckoutForm = {
+        first_name: '',
+        last_name: '',
+        phone_number: 0,
+        address: '',
+        email: '',
+        postal_code: '',
+        city: '',
+        country: '',
+        payment_method: '',
+        shipping_details: {
+            address: '',
+            city: '',
+            postal_code: '',
+            country: '',
+            phone_number: '',
+            reciever_name: '',
+        },
+        total_amount: '',
+        cart_details: [],
+    }
+
+    var checkoutForm = {
+        first_name: '',
+        last_name: '',
+        phone_number: 0,
+        address: '',
+        email: '',
+        postal_code: '',
+        city: '',
+        country: '',
+        payment_method: '',
+        shipping_details: {
+            address: '',
+            city: '',
+            postal_code: '',
+            country: '',
+            phone_number: '',
+            reciever_name: '',
+        },
+        total_amount: '',
+        cart_details: [],
+    }
+
+    var products = [
+        {
+            id: 1,
+            name: 'water bottle',
+            description: 'color:blue size: large',
+            price: 100,
+            discounted_price: 99,
+        },
+        {
+            id: 2,
+            name: 'mouse',
+            description: 'wired usb port',
+            price: 250,
+            discounted_price: 199,
+
+        },
+        {
+            id: 3,
+            name: 'watch',
+            description: 'color:black, watch type:smart, brand:apple',
+            price: 5000,
+            discounted_price: 4999,
+
+        },
+        {
+            id: 4,
+            name: 'infinix s23',
+            description: 'color:blue,storage: 120gb ram: 2gb display: 6x4',
+            price: 25000,
+            discounted_price: 24999,
+
+        },
+        {
+            id: 5,
+            name: 'shoes',
+            description: 'size: 8, color: blue, type: sports wear',
+            price: 3000,
+            discounted_price: 3000,
+
+        },
+    ];
+
+    renderProducts();
+
+    function validateFields() {
+        var basicFields = [
+            'first_name',
+            'last_name',
+            'address',
+            'postal_code'
+        ]
+        const basicValidation = () => {
+            var checkValidation = true;
+            basicFields.forEach((x) => {
+                if (document.getElementById(x).value == '' || document.getElementById(x).value == null) {
+                    checkValidation = false;
+
+                    document.getElementById('taskErrorField-' + x).hidden = false
+                } else {
+                    document.getElementById('taskErrorField-' + x).hidden = true
+                }
+            })
+            return checkValidation
+        }
+
+
+
+        var testBasicValidation = basicValidation();
+        if (!testBasicValidation) {
+            return false
+
+        }
+
+        const validatePhoneNumber = (phoneNumber) => {
+            const regx = /^(\+92|92|033|03)[ -]*\d{3}[ -]*\d{7}$/;
+            return regx.test(phoneNumber);
+        }
+
+
+        if (!validatePhoneNumber(document.getElementById('number').value)) {
+            document.getElementById('taskErrorField-number').hidden = false
+            return false
+        } else {
+            document.getElementById('taskErrorField-number').hidden = true
+        }
+
+        const validateEmail = (email) => {
+            const regx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return regx.test(email);
+        }
+
+        if (!validateEmail(document.getElementById('email').value)) {
+            document.getElementById('taskErrorField-email').hidden = false;
+            return false;
+        } else {
+            document.getElementById('taskErrorField-email').hidden = true;
+        }
+
+
+        if (checkoutForm.cart_details.length == 0) {
+            alert("Please add items in your cart first");
+            return false
+        }
+
+        return true
+
+
+
+
+
+
+    }
+
+    function submitCheckout() {
+        debugger;
+        const checkForm = validateFields();
+        if (checkForm) {
+            alert("Thankyou for Shopping with us");
+            checkoutForm = initialCheckoutForm;
+            document.getElementById('ecommerceForm').reset();
+            renderCarts();
+        }
+    }
+
+
+
+
+    function addToCart(product) {
+        debugger;
+        var currentProduct = products.find((x) => { return x.id == product });
+        var currentQty = document.getElementById('qty' + product).value == '' || document.getElementById('qty' + product).value == null ? 1 : document.getElementById('qty' + product).value;
+        cartExistIndex = checkoutForm.cart_details.findIndex((x) => { return x.id == product });
+        if (cartExistIndex != -1) {
+            checkoutForm.cart_details[cartExistIndex].quantity += parseInt(currentQty);
+        } else {
+            var cartItem = {
+                ...currentProduct,
+                quantity: currentQty,
+            }
+
+            checkoutForm.cart_details.push(cartItem);
+        }
+        document.getElementById('qty' + product).value = '';
+        renderCarts();
+    }
+
+
+    function removeItemCart(id) {
+        debugger;
+        var proIndex = checkoutForm.cart_details.findIndex((x) => { return x.id == id });
+        checkoutForm.cart_details.splice(proIndex, 1);
+
+        renderCarts();
+    }
+    function calculateTotal() {
+        return checkoutForm.cart_details.reduce((total, item) => {
+            return total + (item.discounted_price < item.price ? item.discounted_price : item.price) * item.quantity;
+        }, 0);
+    }
+
+
+    function renderCarts() {
+        let cartHtml = '';
+        let totalAmount = calculateTotal();
+        var cartDiv = document.getElementById('boxlist');
+
+
+        checkoutForm.cart_details.forEach((x) => {
+            var priceBox = x.discounted_price < x.price ? `<div class='text-mountain-meadow-600'>
+                    <span class='text-flamingo-500 line-through'> `+ x.price + `</span>
+                    `+ x.discounted_price + `
+                </div>` : `<div class='text-mountain-meadow-600'>
+                    `+ x.price + `
+                </div>` ;
+
+
+            cartHtml += `<div class="box bg-flamingo-200 font-medium text-black-950">
+                    <div style="padding-left:10px; border-radius: 50%; padding-right:10px; display:flex; justify-content:space-between; align-items:centre;">
+                        <p>`+ x.name + `</p>
+                        `+ priceBox + `
+                        <div>
+                            Quantity `+ x.quantity + `
+                            </div>
+                            <div>
+                                <button  class="text-great-blue-100" onclick="removeItemCart(`+ x.id + `)">
+                                    X
+                                    </button>
+                                </div>
+                            </div>
+                      </div>`;
+        })
+        cartHtml += `<div class="total-amount">
+                <strong>Total Amount: </strong> ` + totalAmount.toFixed(2) + `
+            </div>`;
+
+        cartDiv.innerHTML = cartHtml;
+    }
+
+    function renderProducts() {
+        let productHtml = '';
+        var productDiv = document.getElementById('main');
+
+
+        products.forEach((x) => {
+            var priceBox = x.discounted_price < x.price ? `<div class = 'text-mountain-meadow-600'>
+        <span class='text-flamingo-500 line-through'> `+ x.price + `</span>
+        `+ x.discounted_price + `
+        </div>` : `<div class='text-mountain-meadow-600'>
+            `+ x.price + `
+            </div>` ;
+
+
+            productHtml += `<div class='bg-flamingo-100  p-4 rounded-md shadow-2xl slideDown'>
+            <h1  class='font-bold'>` + x.name + `</h1>
+            <p>` + x.description + `</p>
+            `+ priceBox + `
+            <div class='addToCartBox'>
+                <input type='number' id='qty` + x.id + `'/>
+                <button class='bg-blue-500 text-great-blue-100 font-medium rounded-lg w-32 py-1' onclick='addToCart(`+ x.id + `)'>Add to Cart</button>
+
+                </div>
+          </div>`;
+
+        });
+        productDiv.innerHTML = productHtml;
+
+    }
+
+
+
+</script>
+
+</html>
