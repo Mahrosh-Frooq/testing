@@ -25,20 +25,20 @@
                             950: '#222F53'
                         },
                         'flamingo': {
-  DEFAULT: '#EF4444',
-  50: '#FDEDED',
-  100: '#FCDADA',
-  200: '#F9B5B5',
-  300: '#F58F8F',
-  400: '#F26A6A',
-  500: '#EF4444',
-  600: '#ED3131',
-  700: '#EC1E1E',
-  800: '#E21313',
-  900: '#D01212',
-  950: '#C61111'
-},
-'black': {
+                            DEFAULT: '#EF4444',
+                            50: '#FDEDED',
+                            100: '#FCDADA',
+                            200: '#F9B5B5',
+                            300: '#F58F8F',
+                            400: '#F26A6A',
+                            500: '#EF4444',
+                            600: '#ED3131',
+                            700: '#EC1E1E',
+                            800: '#E21313',
+                            900: '#D01212',
+                            950: '#C61111'
+                        },
+                        'black': {
                             DEFAULT: '#0F0F0F',
                             50: '#6B6B6B',
                             100: '#616161',
@@ -103,10 +103,6 @@
 <body id="app" class="bg-flamingo-50 flex flex-col text-black-900 h-svh">
     <div class="bg-flamingo-400 p-8">
         <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
-        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
-        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
-        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
-        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
         <button @click="changesMsg">Change Me</button>
     </div>
     <div id='container' class="flex grow flex-column">
@@ -114,7 +110,8 @@
             <h1 class="text-great-blue-200 text-2xl">Sidebar</h1>
         </div>
         <div id='mainBox' class="flex w-full gap-4">
-            <div class='bg-flamingo-200 text-black-900 p-4 rounded-md shadow-2xl slideDown' style='width: 30%;'>
+            <div class='bg-flamingo-200 text-black-900 p-4 rounded-md shadow-2xl slideDown'
+             style='width: 30%;'>
                 <form id='ecommerceForm' onsubmit='event.preventDefault();'
                     style='display:flex ;flex-direction:column; gap:4px;'>
                     <label>Checkout Form</label>
@@ -155,14 +152,37 @@
                             Online Payment
                         </label>
                     </div>
-                    <button type='button' onclick="submitCheckout()" id='submitBtn'
+                    <button type='button' @click="submitCheckout()" id='submitBtn'
                         class='bg-blue-500 text-great-blue-100 p-2 border-0 hover:bg-blue-600 active:bg-blue-600 rounded-md'>Checkout</button>
                 </form>
                 <div>
                     <label>Cart Details</label>
                     <div id="boxlist" style="width:80%; display: flex; flex-direction: column; gap: 4px;"
                         class="grid-item slideDown">
+                    <div class="box bg-blue-50 font-medium text-blue-900">
+                        <div style="padding-left:10px; border-radius:50%; padding-right:10px; display:flex; justify-content:space-between; align-items: center; "v-for="(x, index)in this.checkoutForm.cart_details">
+                            <p>{{x.name}}</p>
+                            <Div class='text-flamingo-500' v-if="x.discounted_price < x.price">
+                                <span class='text-flamingo-600 line-through' :data-id="x.id">
+                                    {{x.price}}
+                                </span>
+                                {{x,discounted_price}}
+                            </div>
+                            <div class='text-great-blue-500' v-else>
+                                {{x.price}}
+                            </div>
+                            <div>
+                                {{'Quantity '+ x.quantity }}
 
+                            </div>
+                            <div>
+                                <button class="text-flamingo-500"
+                                @click="removeItemCart(x.id)">
+                            X
+                        </button>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -172,45 +192,45 @@
         </div>
 </body>
 <script>
-     const { createApp, ref } = Vue
+    const { createApp, ref } = Vue
 
-createApp({
-  data() {
-    return {
-        message:'Hello Vue!'
-    }
-},
-beforeCreate() {
-    debugger;
-    alert("we are here before html appears");
-},
-created() {
-    alert("we are here when html created or in a process of rendering");
-},
-beforeMount() {
-    let docCountry = document.getElementById('country');
-    console.log("************* before mount **************");
-    console.log(docCountry);
-},
-mounted() {
-    let docCountry = document.getElementById('country');
-    console.log(docCountry);
-},
-beforeUpdate() {
-    alert("I am here because message being updated");
-},
-updated() {
-    alert("I am here because message is updated now");
-    console.log("************ let see message is updated now ****************");
-    console.log(this.message);
-    this.message = "We are in infinite loop";
-},
-methods: {
-    changesMsg () {
-        this.message = "I am changed now"
-    }
-}
-}).mount('#app')
+    createApp({
+        data() {
+            return {
+                message: 'Hello Vue!'
+            }
+        },
+        beforeCreate() {
+            debugger;
+            alert("we are here before html appears");
+        },
+        created() {
+            alert("we are here when html created or in a process of rendering");
+        },
+        beforeMount() {
+            let docCountry = document.getElementById('country');
+            console.log("************* before mount **************");
+            console.log(docCountry);
+        },
+        mounted() {
+            let docCountry = document.getElementById('country');
+            console.log(docCountry);
+        },
+        beforeUpdate() {
+            alert("I am here because message being updated");
+        },
+        updated() {
+            alert("I am here because message is updated now");
+            console.log("************ let see message is updated now ****************");
+            console.log(this.message);
+            this.message = "We are in infinite loop";
+        },
+        methods: {
+            changesMsg() {
+                this.message = "I am changed now"
+            }
+        }
+    }).mount('#app')
 
 
 
