@@ -114,7 +114,7 @@
              style="width: 30%;">
                 <form id="ecommerceForm" onsubmit="event.preventDefault();"
                     style="display:flex ;flex-direction:column; gap:4px;">
-                    <label>Checkout Form</label>
+                    <label>Checkout Form ({{computedTotalCart}})</label>
                     <input type="text" name="first_name" required id="first_name" placeholder="Enter your first_name" />
                     <span style="color:red;" hidden id="taskErrorField-first_name">This field is required</span>
                     <input type="text" name="last_name" required id="last_name" placeholder="Enter your last_name" />
@@ -152,7 +152,7 @@
                             Online Payment
                         </label>
                     </div>
-                    <button type="button" onclick="submitCheckout()"
+                    <button type="button" @click="submitCheckout()"
                      id="submitBtn"
                         class="bg-great-blue-600 text-flamingo-200 p-2 border-0 hover:bg-blue-600 active:bg-blue-600 rounded-md">Checkout</button>
                 </form>
@@ -215,17 +215,17 @@
         </body>
 </body>
 <script>
-    const { createApp, ref, onMounted, dateformat } = Vue
+    const { createApp } = Vue
 
     
 
     createApp({
-        setup() {
-            const message = ref("Hello vue!");
-            const initialCheckoutForm = {
+       data() {
+        return {
+       
 
            
-   
+        initialCheckoutForm:{
         first_name: "",
         last_name: "",
         phone_number: 0,
@@ -245,9 +245,9 @@
         },
         total_amount: "",
         cart_details: [],
-    };
+    },
 
-    const checkoutForm =ref({
+     checkoutForm :{
         first_name: "",
         last_name: "",
         phone_number: 0,
@@ -267,9 +267,9 @@
         },
         total_amount: "",
         cart_details: [],
-    });
+    },
 
-    const products = [
+     products: [
         {
             id: 1,
             name: "water bottle",
@@ -309,12 +309,29 @@
             discounted_price: 3000,
 
         },
-    ];
-       onMounted(()=>{
-        alert("let see")
-       });
-    const validateFields = () => {
-        var basicFields = [
+    ],
+    message: "Hello Vue!",
+        };
+      },
+      computed: {
+        
+        computedTotalCart() {
+          const sum = this.checkoutForm.cart_details.reduce((accumulator, currentValue) => {
+            var currentPrice = currentValue.discounted_price < currentValue.price ? currentValue.discounted_price : currentValue.price
+            return accumulator + currentPrice * currentValue.quantity
+          }, 0);
+          return sum;
+        }
+      },
+      mounted() {
+        let docCountry = document.getElementById("country");
+        console.log(docCountry);
+      },
+      methods: {
+        validateFields() {
+          var basicFields = [
+      
+      
             "first_name",
             "last_name",
             "address",
@@ -323,16 +340,18 @@
         const basicValidation = () => {
             var checkValidation = true;
             basicFields.forEach((x) => {
-                if (document.getElementById(x).value == "" || document.getElementById(x).value == null) {
-                    checkValidation = false;
-
-                    document.getElementById("taskErrorField-" + x).hidden = false;
-                } else {
-                    document.getElementById("taskErrorField-" + x).hidden = true;
-                }
-            });
-            return checkValidation
-        };;
+                if (
+                this.checkoutForm[x] == "" ||
+                this.checkoutForm[x] == null
+              ) {
+                checkValidation = false;
+                document.getElementById("taskErrorField-" + x).hidden = false;
+              } else {
+                document.getElementById("taskErrorField-" + x).hidden = true;
+              }
+            }); 
+            return checkValidation;
+        };
 
 
 
@@ -348,7 +367,7 @@
         };
 
 
-        if (!validatePhoneNumber(document.getElementById("number").value)) {
+        if (!validatePhoneNumber(this.checkoutForm.phone_number)) {
             document.getElementById("taskErrorField-number").hidden = false;
             return false;
         } else {
@@ -360,7 +379,7 @@
             return regex.test(email);
         };
 
-        if (!validateEmail(document.getElementById("email").value)) {
+        if (!validateEmail(this.checkoutForm.email)) {
             document.getElementById("taskErrorField-email").hidden = false;
             return false;
         } else {
@@ -370,41 +389,41 @@
 
         if (checkoutForm.cart_details.length == 0) {
             alert("Please add items in your cart first");
-            return false
+            return false;
         }
 
-        return true
+        return true;
 
 
 
 
 
 
-    }
+    },
 
-    const submitCheckout = () => {
+     submitCheckout() {
         const checkForm = this.validateFields();
         if (checkForm) {
             alert("Thankyou for Shopping with us");
             checkoutForm.value = { ...initialCheckoutForm};
-            checkoutForm.value.cart_details = [];
+            checkoutForm.cart_details = [];
             document.getElementById("ecommerceForm").reset();
           
         }
-    };
+    },
 
 
 
 
-    const addToCart = (product)=> {
-        debugger;
+    addToCart (product) {
+       
         var currentProduct = products.find((x) => { return x.id == product });
         var currentQty = document.getElementById("qty" + product).value == "" || document.getElementById("qty" + product).value == null ? 1 : document.getElementById("qty" + product).value;
-        cartExistIndex = checkoutForm.cart_details.findIndex((x) => { return x.id == product;
+        cartExistIndex =this.checkoutForm.cart_details.findIndex((x) => { return x.id == product;
 
          });
         if (cartExistIndex != -1) {
-            checkoutForm.value.cart_details[cartExistIndex].quantity += parseInt(currentQty);
+            this.checkoutForm.value.cart_details[cartExistIndex].quantity += parseInt(currentQty);
         } else {
             var cartItem = {
                 ...currentProduct,
@@ -415,36 +434,24 @@
         }
         document.getElementById("qty" + product).value = "";
        
-    };
+    },
 
 
-    function removeItemCart(id) {
+    removeItemCart(id) {
        
-        var proIndex = checkoutForm.value.cart_details.findIndex((x) => { return x.id == id });
-        checkoutForm.value.cart_details.splice(proIndex, 1);
+        var proIndex = this.checkoutForm.cart_details.findIndex((x) => { return x.id == id });
+        this.checkoutForm.cart_details.splice(proIndex, 1);
 
       
-    };
-    function calculateTotal() {
-        return checkoutForm.cart_details.reduce((total, item) => {
-            return total + (item.discounted_price < item.price ? item.discounted_price : item.price) * item.quantity;
-        }, 0);
-    }
+    },
+  
 
-    const changesMsg = () => {
-          message.value = "I am change now";
-        };
+     changesMsg (){
+          this.message = "I am change now";
+        },
 
-        return {
-          message,
-          initialCheckoutForm,
-          checkoutForm,
-          addToCart,
-          removeItemCart,
-          products,
-          sumbitCheckout,
-          changesMsg,
-        };
+       
+       
       },
     }).mount("#app");
    
