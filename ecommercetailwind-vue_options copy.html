@@ -1,16 +1,20 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <title> First Class Html</title>
     <link rel="icon" type="image/png" href="simple-twitter-16x16-icon-png-7.png" />
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="tailwindcss.js"></script>
+    <script src="vue.js"></script>
+
+
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        "blue": {
+                        blue: {
                             DEFAULT: "#6B82C2",
                             50: "#FDFDFE",
                             100: "#EDF0F8",
@@ -24,7 +28,7 @@
                             900: "#283762",
                             950: "#222F53"
                         },
-                        "flamingo": {
+                        flamingo: {
                             DEFAULT: "#EF4444",
                             50: "#FDEDED",
                             100: "#FCDADA",
@@ -38,7 +42,7 @@
                             900: "#D01212",
                             950: "#C61111"
                         },
-                        "black": {
+                        black: {
                             DEFAULT: "#0F0F0F",
                             50: "#6B6B6B",
                             100: "#616161",
@@ -52,7 +56,7 @@
                             900: "#000000",
                             950: "#000000"
                         },
-                        "great-blue": {
+                        greatblue: {
                             DEFAULT: "#2A669F",
                             50: "#FFFFFF",
                             100: "#FFFFFF",
@@ -65,7 +69,7 @@
                             800: "#2A2C9F",
                             900: "#3C2A9F"
                         },
-                        "flamingo": {
+                        flamingo: {
                             DEFAULT: "#EF4444",
                             50: "#FDEDED",
                             100: "#FCDADA",
@@ -79,7 +83,7 @@
                             900: "#4C0707",
                             950: "#320404"
                         },
-                        "mountain-meadow": {
+                        mountainmeadow: {
                             DEFAULT: "#10B981",
                             50: "#8CF5D2",
                             100: "#79F3CB",
@@ -93,16 +97,16 @@
                             900: "#000000",
                             950: "#000000"
                         },
-                    }
-                }
-            }
-        }
+                    },
+                },
+            },
+        };
     </script>
 </head>
 
 <body id="app" class="bg-flamingo-50 flex flex-col text-blue-900 h-svh">
     <div class="bg-flamingo-400 p-8">
-        <h1 class="text-great-blue-200 text-6xl">{{message}}</h1>
+        <h1 class="text-great-blue-200 text-6xl">{{ message }}</h1>
         <button @click="changesMsg">Change Me</button>
     </div>
     <div id="container" class="flex grow flex-column">
@@ -114,7 +118,7 @@
              style="width: 30%;">
                 <form id="ecommerceForm" onsubmit="event.preventDefault();"
                     style="display:flex ;flex-direction:column; gap:4px;">
-                    <label>Checkout Form ({{computedTotalCart}})</label>
+                    <label>Checkout Form ( {{computedTotalCart}} )</label>
                     <input type="text" name="first_name" required id="first_name" placeholder="Enter your first_name" />
                     <span style="color:red;" hidden id="taskErrorField-first_name">This field is required</span>
                     <input type="text" name="last_name" required id="last_name" placeholder="Enter your last_name" />
@@ -161,7 +165,7 @@
                     <div id="boxlist" style="width:80%; display: flex; flex-direction: column; gap: 4px;"
                         class="grid-item slideDown">
                     <div class="box bg-flamingo-50 font-medium text-blue-900">
-                        <div style="padding-left:10px; border-radius:50%; padding-right:10px; display:flex; justify-content:space-between; align-items: center; "v-for="(x, index)in this.checkoutForm.cart_details">
+                        <div style="padding-left:10px; border-radius:50%; padding-right:10px; display:flex; justify-content:space-between; align-items: center; " v-for="(x, index) in checkoutForm.cart_details">
                             <p>{{x.name}}</p>
                             <div class="text-flamingo-500"v-if="x.discounted_price < x.price">
                                 <span class="text-flamingo-600 line-through" :data-id="x.id">
@@ -189,19 +193,19 @@
             </div>
             <div id="main" class="p-4 grid grow border-box grid-cols-2 gap-4">
                 <div 
-                class="bg-flamingo-500 text-black-500 p-4 rounded-md shadow-2xl slideDown"
+                class="bg-flamingo-400 text-black-500 p-4 rounded-md shadow-2xl slideDown"
                 v-for="(x, index) in products">
                 <h1 class="font-bold">{{x.name}}</h1>
                 <p class="font-medium">{{x.description}}</p>
                 <div class="text-mountain-meadow-500" v-if="x.discounted_price < x.price">
-                    <span class="text-flamingo-600 line-through">{{ x.price}}</span>
+                    <span class="text-flamingo-400 line-through">{{ x.price}}</span>
                     {{x.discounted_price}}
                 </div>
                 <div class="text-mountain-meadow-500" v-else>{{x.price}}</div>
                 <div class="">
                     <input type="number":id='"qty" + x.id'/>
                     <button
-                    class="bg-great-blue-400 text-flamingo-200 font-medium rounded-lg w-32 py-1"
+                    class="bg-great-blue-600 text-flamingo-100 font-medium rounded-lg w-32 py-1"
                     @click="addToCart(x.id)">
                 Add To cart
             </button>
@@ -215,7 +219,7 @@
         </body>
 </body>
 <script>
-    const { createApp } = Vue
+    const { createApp } = Vue;
 
     
 
