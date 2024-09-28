@@ -193,23 +193,23 @@
                 </div>
             </div>
             <div id="main" class="p-4 grid grow border-box grid-cols-2 gap-4">
-                <div id="main" class="p-4 grid grow border-box grid-cols-2 gap-4">
+               
                     <div
-                      class="bg-white-500 text-black-500 p-4 rounded-md shadow-2xl slideDown"
+                      class="bg-flamingo-100 text-black-500 p-4 rounded-md shadow-2xl slideDown"
                       v-for="(x, index) in products"
                     >
                       <h1 class="font-bold">{{ x.name }}</h1>
                       <p class="font-medium">{{ x.description }}</p>
           
-                      <div class="text-seaGreen-500" v-if="x.discounted_price < x.price">
-                        <span class="text-red-600 line-through">{{ x.price }}</span>
+                      <div class="text-mountain-meadow-500" v-if="x.discounted_price < x.price">
+                        <span class="text-flamingo-600 line-through">{{ x.price }}</span>
                         {{ x.discounted_price }}
                       </div>
-                      <div class="text-seaGreen-500" v-else>{{ x.price }}</div>
+                      <div class="text-mountain-meadow-500" v-else>{{ x.price }}</div>
                       <div class="">
                         <input type="number" :id='"qty"+ x.id' />
                         <button
-                          class="bg-blue-400 text-white-200 font-medium rounded-lg w-32 py-1"
+                          class="bg-great-blue-500 text-flamingo-200 font-medium rounded-lg w-32 py-1"
                           @click="addToCart(x.id)"
                         >
                           Add to Cart
@@ -328,8 +328,6 @@ createApp({
           return total;
         });
 
-    renderProducts();
-
     const validateFields=() => {
         var basicFields = [
             "first_name",
@@ -340,7 +338,7 @@ createApp({
         const basicValidation = () => {
             var checkValidation = true;
             basicFields.forEach((x) => {
-                if (checkoutForm.value == "" || checkoutForm.value == null) {
+                if (checkoutForm.value[x] == "" || checkoutForm.value[x] == null) {
                     checkValidation = false;
 
                     document.getElementById("taskErrorField-" + x).hidden = false;
@@ -400,15 +398,15 @@ createApp({
 
     };
 
-    function submitCheckout  =  () => {
+    const submitCheckout  =  () => {
        
         const checkForm = validateFields();
         if (checkForm) {
             alert("Thankyou for Shopping with us");
-            checkoutForm.value = initialCheckoutForm;
+            checkoutForm.value = {...initialCheckoutForm};
             checkoutForm.value.cart_details = [];
             document.getElementById("ecommerceForm").reset();
-            renderCarts();
+          
         }
     };
 
@@ -446,44 +444,23 @@ createApp({
    
 
     
-        cartHtml += `<div class="total-amount">
-                <strong>Total Amount: </strong> ` + totalAmount.toFixed(2) + `
-            </div>`;
+      const changesMsg = () => {
+        message.value = "I am change now";
+      };
 
-        cartDiv.innerHTML = cartHtml;
-    }
-
-    function renderProducts() {
-        let productHtml = "";
-        var productDiv = document.getElementById("main");
-
-
-        products.forEach((x) => {
-            var priceBox = x.discounted_price < x.price ? `<div class = "text-mountain-meadow-600">
-        <span class="text-flamingo-500 line-through"> `+ x.price + `</span>
-        `+ x.discounted_price + `
-        </div>` : `<div class="text-mountain-meadow-600">
-            `+ x.price + `
-            </div>` ;
-
-
-            productHtml += `<div class="bg-flamingo-100  p-4 rounded-md shadow-2xl slideDown">
-            <h1  class="font-bold">` + x.name + `</h1>
-            <p>` + x.description + `</p>
-            `+ priceBox + `
-            <div class="addToCartBox">
-                <input type="number" id="qty` + x.id + `"/>
-                <button class="bg-blue-500 text-great-blue-100 font-medium rounded-lg w-32 py-1" onclick="addToCart(`+ x.id + `)">Add to Cart</button>
-
-                </div>
-          </div>`;
-
-        });
-        productDiv.innerHTML = productHtml;
-
-    }
-
-
+      return {
+        message,
+        initialCheckoutForm,
+        checkoutForm,
+        addToCart,
+        removeItemCart,
+        products,
+        submitCheckout,
+        computedTotalCart,
+        changesMsg,
+      };
+    },
+}).mount("#app");
 
 </script>
 
