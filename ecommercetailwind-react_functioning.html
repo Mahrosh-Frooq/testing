@@ -3,7 +3,7 @@
 <head>
     <title> First Class Html</title>
     <link rel='icon' type='image/png' href='simple-twitter-16x16-icon-png-7.png' />
-    <script src="/react-dev.js"></script>
+    <script src="react-dev.js"></script>
     <script src="react-dom.js"></script>
     <script src="tailwindcss.js"></script>
     <script>
@@ -137,7 +137,7 @@ crossorigin
             {
                 id:2,
                 name:'mouse',
-                description:'wired usb port',
+                description:'wiflamingo usb port',
                 price: 250,
                 discounted_price: 199,
             },
@@ -165,110 +165,126 @@ crossorigin
             }, 
         
         ];
-    
-    return (
-    <>
-    {
-    products.map((x) => {
-    return (
-    <div className="bg-flamingo-500 text-black-500 p-4 rounded-md shadow-2x1 slideDown">
-    <h1 className="font-bold">{x.name}<h1>
-    <p className="font-medium">{x.description}</p>
-    <div className="text-mountain-meadow-500"
-    v-if="x.discounted_price < x.price">
-    <span className="text-flamingo-600 line-through">{x.price}</span>
-    {x.discounted_price}
-    </div>
-    <div className="text-mountain-meadow-500"
-    v-else>{x.price}</div>
-    <div className="">
-    <input type="number" id='"qty" x.id'/>
-    <button
-    className="bg-blue-400 text-flamingo-300 font-medium rounded-lg w-32 py-1"
-    onClick={()=>{addToCart(x.id)}}
-    >
-    Add to Cart
-    </button>
-    </div>
-    </div>
-    )
-    })
+        return (
+            <>
+            {
+                products.map((x) => {
+                    return (
+                        <div className="bg-flamingo-500 text-black-500 p-4 rounded-md shadow-2xl slideDown">
+                            <h1 className="font-bold">{ x.name }</h1>
+                            <p className="font-medium">{ x.description }</p>
+
+                            <div className="text-mountain-meadow-500" v-if="x.discounted_price < x.price">
+                            <span className="text-flamingo-600 line-through">{ x.price }</span>
+                            { x.discounted_price }
+                            </div>
+                            <div className="text-mountain meadow-500" v-else>{ x.price }</div>
+                            <div className="">
+                            <input type="number" id='"qty"+ x.id' />
+                            <button
+                                className="bg-blue-400 text-flamingo-200 font-medium rounded-lg w-32 py-1"
+                                onClick={()=>{ addToCart(x.id) }}
+                            >
+                                Add to Cart
+                            </button>
+                            </div>
+                        </div>
+                     )
+                })
+            }
+            </>
+        )
     }
-    </>
-   )
-   }
 
-   const Application = () => {
-    const [message, setMessage] = React.useState('HelloReact!');
-    let newMesg = "This is Let";
-   }
-</script>
-    <div class="bg-flamingo-400 p-8">
-        <h1 class="text-great-blue-200 text-6xl">Header</h1>
-    </div>
-    <div id='container' class="flex grow flex-column">
-        <div class="w-72 box-border p-8 bg-flamingo-300">
-            <h1 class="text-great-blue-200 text-2xl">Sidebar</h1>
-        </div>
-        <div id='mainBox' class="flex w-full gap-4">
-            <div class='bg-flamingo-200 text-black-900 p-4 rounded-md shadow-2xl slideDown' style='width: 30%;'>
-                <form id='ecommerceForm' onsubmit='event.preventDefault();'
-                    style='display:flex ;flex-direction:column; gap:4px;'>
-                    <label>Checkout Form</label>
-                    <input type='text' name='first_name' required id='first_name' placeholder="Enter your first_name" />
-                    <span style='color:red;' hidden id='taskErrorField-first_name'>This field is required</span>
-                    <input type='text' name='last_name' required id='last_name' placeholder='Enter your last_name' />
-                    <span style='color:red;' hidden id='taskErrorField-last_name'>This field is required</span>
-                    <input type='tel' name='number' required id='number' placeholder="Enter your phone_number" />
-                    <span style='color:red;' hidden id='taskErrorField-number'>This field is required</span>
-                    <textarea id="address" name="address" placeholder="Enter your full address"></textarea>
-                    <span style='color:red;' hidden id='taskErrorField-address'>This field is required</span>
-                    <input type='email' name='email' required id='email' placeholder="Enter your email" />
-                    <span style='color:red;' hidden id='taskErrorField-email'>This field is required</span>
-                    <input type='text' name='postal_code' required id='postal_code'
-                        placeholder="Enter your postal_code" />
-                    <span style='color:red;' hidden id='taskErrorField-postal_code'>This field is required</span>
-                    <select id="city" name="city">
-                        <option selected>KARACHI</option>
-                        <option selected>ISLAMABAD</option>
-                        <option selected>LAHORE</option>
-                        <option selected>HYDERABAD</option>
-                        <option selected>GURANWALA</option>
-                    </select>
-                    <span style='color:red;' hidden id='taskErrorField-city'>This field is required</span>
-                    <select id="country" name="country">
-                        <option selected>PAKISTAN</option>
-                    </select>
-                    <span style='color:red;' hidden id='tasErrorField-country'>This field is required</span>
-                    <div>
-                        <label class="flex gap-2 blue-700">
-                            <input type="radio" name='task' required id='payment_method' checked
-                                placeholder="Enter your payment_method" />
-                            Cash On Delivery
-                        </label>
-                        <label class="flex gap-2 ">
-                            <input type="radio" name='task' required id='payment_method'
-                                placeholder="Enter your payment_method" />
-                            Online Payment
-                        </label>
+    const Application = () => {
+
+        const [message, setMessage] = React.useState('Hello React!');
+       
+        let newMesg = "This is Let";
+        const changeMessageValue = (newVal) => {
+            setMessage(newVal);
+            newMesg = "This has been changed also";
+        }
+
+        return (
+            <>
+                <div className="bg-flamingo-50 p-8">
+                    <h1 className="text-blue-500 text-6xl"> { message }</h1>
+                    <h1 className="text-blue-500 text-6xl"> { newMesg }</h1>
+                    <button onClick={()=>{ changeMessageValue("This has been Changed") }}>
+                        Change me please!
+                    </button>
+                </div>
+                <div id='container' className="flex grow flex-column">
+                    <div className="w-72 box-border p-8 bg-flamingo-100">
+                        <h1 className="text-blue-400 text-2xl">Sidebar</h1>
                     </div>
-                    <button type='button' onclick="submitCheckout()" id='submitBtn'
-                        class='bg-blue-500 text-great-blue-100 p-2 border-0 hover:bg-blue-600 active:bg-blue-600 rounded-md'>Checkout</button>
-                </form>
-                <div>
-                    <label>Cart Details</label>
-                    <div id="boxlist" style="width:80%; display: flex; flex-direction: column; gap: 4px;"
-                        class="grid-item slideDown">
+                    <div id='mainBox' className="flex w-full gap-4">
+                        <div className='bg-flamingo-500 text-black-500 p-4 rounded-md shadow-2xl slideDown' style={{width: '30%'}}>
+                            <form id='ecommerceForm'
+                                style={{ display: "flex", "flexDirection":"column", gap: "4px" }}>
+                                <label>Checkout Form</label>
+                                <input type='text' name='first_name' requiflamingo id='first_name' placeholder="Enter you first_name" />
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-first_name'>This field is requiflamingo</span>
+                                <input type='text' name='last_name' requiflamingo id='last_name' placeholder="Enter you last_name" />
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-last_name'>This field is requiflamingo</span>
+                                <input type='tel' name='number' requiflamingo id='number' placeholder="Enter you phone_number" />
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-number'>This field is requiflamingo</span>
+                                <textarea id="address" name="address" placeholder="enter your full address"></textarea>
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-address'>This field is requiflamingo</span>
+                                <input type='email' name='email' requiflamingo id='email' placeholder="Enter you email" />
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-email'>This field is requiflamingo</span>
+                                <input type='text' name='postal_code' requiflamingo id='postal_code'
+                                    placeholder="Enter you postal_code" />
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-postal_code'>This field is requiflamingo</span>
+                                <select id="city" name="city" defaultValue="Karachi">
+                                    <option>Karachi</option>
+                                    <option>Lahore</option>
+                                    <option>Islamabed</option>
+                                    <option>Peshawar</option>
+                                    <option>Queta</option>
+                                </select>
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-city'>This field is requiflamingo</span>
+                                <select id="country" name="country" defaultValue="Pakistan">
+                                    <option>Pakistan</option>
+                                </select>
+                                <span style={{color: 'flamingo'}} hidden id='taskErrorField-country'>This field is requiflamingo</span>
+                                <div>
+                                    <label className="flex gap-2 blue-700">
+                                        <input type='radio' name='task' requiflamingo id='payment_method' defaultChecked={true}
+                                            placeholder="Enter you payment_method" />
+                                        Cash on Delivery
+                                    </label>
+                                    <label className="flex gap-2">
+                                        <input type='radio' name='task' requiflamingo id='payment_method'
+                                            placeholder="Enter you payment_method" />
+                                        Online Payment
+                                    </label>
+                                </div>
+                                <button type='button'  id='submitBtn' className='bg-blue-600 text-flamingo-200 p-2 border-0 hover:bg-blue-700 active:bg-blue-700 rounded-md'>Checkout</button>
+                            </form>
+                            <div>
+                                <label>Cart Details</label>
+                                <div id="boxList" style={{ width: "80%", display: "flex", flexDirection: "column", gap: "4px" }}
+                                    className="grid-item slideDown">
 
+                                </div>
+                            </div>
+                        </div>
+                        <div id='main' className="p-4 grid grow border-box grid-cols-2 gap-4">
+                            <ProductBox />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id='main' class="p-4 grid grow border-box grid-cols-2 gap-4">
+            </>
+        )
+    }
 
-            </div>
-        </div>
-</body>
-<script>
+  
+    const root = ReactDOM.createRoot(document.getElementById("AppComponent"))
+    root.render(<Application />);
+    </script>
+  <script>
     var initialCheckoutForm = {
         first_name: '',
         last_name: '',
@@ -324,7 +340,7 @@ crossorigin
         {
             id: 2,
             name: 'mouse',
-            description: 'wired usb port',
+            description: 'wiflamingo usb port',
             price: 250,
             discounted_price: 199,
 
@@ -468,7 +484,7 @@ crossorigin
         renderCarts();
     }
     function calculateTotal() {
-        return checkoutForm.cart_details.reduce((total, item) => {
+        return checkoutForm.cart_details.flamingouce((total, item) => {
             return total + (item.discounted_price < item.price ? item.discounted_price : item.price) * item.quantity;
         }, 0);
     }
